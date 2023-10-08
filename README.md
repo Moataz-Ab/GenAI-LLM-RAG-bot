@@ -1,3 +1,5 @@
 # GenAI-LLM-RAG-bot
 
-WIP
+⌛Work in progress⌛
+
+

@@ -5,6 +5,10 @@ from langchain.chains import LLMChain
 
 
 def load_and_format_file(csv_file):
+    '''
+    - Takes in a csv file and creates file_content list object of the lines in the csv file
+    - Returns a single string of concatenated elemnts in file_contents
+    '''
     with open(csv_file, "r") as file:
         file_contents = file.readlines()
     return ''.join(file_contents)

@@ -1,3 +1,4 @@
 langchain
+OpenAI
 pydantic==1.10.8
 flask

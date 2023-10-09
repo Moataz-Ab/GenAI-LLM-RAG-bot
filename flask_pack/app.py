@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 csv_path = 'tasks.csv'
-OPENAI_API_KEY = os.environ.get('api_key')
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 api_key = OPENAI_API_KEY
 
 def read_csv(csv_path):
@@ -18,17 +18,17 @@ def read_csv(csv_path):
             data.append(row)
     return data
 
-@app.route('/')
+@app.route('/') #calling index home url
 def index():
     data = read_csv(csv_path)
     return render_template('index.html', data=data)
 
-@app.route('/update')
+@app.route('/update') #calling update url
 def update_page():
     return render_template('update.html')
 
 
-@app.route('/update_status', methods=['POST'])
+@app.route('/update_status', methods=['POST']) #retrieving user input from update url
 def update_status():
     task_number = request.form.get('task_number')
     budget = request.form.get('budget')
@@ -37,7 +37,7 @@ def update_status():
     update_status_in_csv(task_number, new_status=status, csv_file=csv_path)
 
 
-    return redirect(url_for('index'))
+    return redirect(url_for('index')) #sending back the user to home index page
 
 
 if __name__ == '__main__':

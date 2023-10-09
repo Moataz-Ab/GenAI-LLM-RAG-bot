@@ -15,11 +15,22 @@ def load_and_format_file(csv_file):
 
 
 def load_openai_llm(api_key, model="gpt-3.5-turbo-instruct-0914", temperature=0.4):
+    '''
+    Ceates an OpenAI model
+    '''
     llm = OpenAI(openai_api_key=api_key, model=model, temperature=temperature)
     return llm
 
 
 def ask_ai(csv_file, api_key, task_number, budget, date):
+    '''
+    - Takes in orginal project data as csv file
+    - Retrieves current satus data from user
+    - Prompts OpenAi to check the task status and provide recommendations on the next step
+    - Returns task number, RAG status color, and recommendations
+    '''
+
+
     formatted_file_contents = load_and_format_file(csv_file)
     llm = load_openai_llm(api_key)
 
@@ -50,13 +61,20 @@ def ask_ai(csv_file, api_key, task_number, budget, date):
     return task_number, status, response
 
 def update_status_in_csv(task_number, new_status, csv_file):
+    '''
+    - Takes in the csv, task number, and its new status
+    - Formats the data from the csv file and locates the task status position
+    - Updates the status of the task in the csv file
+    '''
+
     valid_statuses = ["r", "red", "g", "green", "a", "amber", "o", "orange"]
 
     if new_status not in valid_statuses:
         return
 
+
     with open(csv_file, "r") as file:
-        rows = file.readlines()
+        rows = file.readlines() #list of the rows
 
     header = rows[0].strip().split(',')
     status_index = header.index('Status')

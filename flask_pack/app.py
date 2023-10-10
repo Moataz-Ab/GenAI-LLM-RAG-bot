@@ -4,6 +4,7 @@ from flask import request
 import datetime
 from utils import *
 import os
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -32,11 +33,15 @@ def update_page():
 
 @app.route('/update_status', methods=['POST'])
 def update_status():
+    csv_df = pd.read_csv(csv_path)
     task_number = request.form.get('task_number')
-    budget = request.form.get('budget')
+    spent_budget = request.form.get('budget')
     date = datetime.date.today()
-    task_number, status, response = ask_ai(csv_path, api_key, task_number, budget, date)
-    update_status_and_budget_in_csv(task_number, new_status=status, csv_file=csv_path, new_budget=budget, recommendation=response.split(",")[1])
+    original_budget = csv_df.iloc[(int(task_number)-1),1]
+    starting_date = csv_df.iloc[(int(task_number)-1),3]
+    deadline_date = csv_df.iloc[(int(task_number)-1),4]
+    task_number, status, response = ask_ai(csv_path, api_key, task_number, original_budget, spent_budget, starting_date, deadline_date, date)
+    update_status_and_budget_in_csv(task_number, new_status=status, csv_file=csv_path, spent_budget=spent_budget, recommendation=response.split(",")[1])
     return redirect(url_for('index'))
 
 #run

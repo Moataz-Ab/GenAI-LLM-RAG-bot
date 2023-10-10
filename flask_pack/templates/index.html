@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,82 +8,151 @@
     <title>Tasks Overview</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px auto;
-            max-width: 800px;
-            background-color: #f4f4f4;
+            font-family: 'Nunito', sans-serif;
+            background-image: linear-gradient(120deg, #edf2f7 0%, #e2e8f0 100%);
+            color: #2d3748;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4a5568;
+            padding: 10px 0;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: auto;  /* Let it adapt to its content width */
+            max-width: 95%;  /* Set a maximum width */
+            margin: 60px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            color: #4a5568;
+        }
+
+        a {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            background-color: #48bb78;
+            color: #ffffff;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #2f855a;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
         }
 
         th, td {
-            padding: 10px 15px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            min-width: 120px; /* Increased width */
+            text-align: center;
+        }
+
+        td:nth-child(7) {
+            text-align: left;
         }
 
         th {
-            background-color: #333;
-            color: white;
+            background-color: #f7fafc;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #4a5568;
         }
 
         tr:hover {
-            background-color: #f5f5f5;
+            background-color: #f0f4f8;
         }
 
-        .red {
-            background-color: red;
-            color: white;
+        td:nth-child(6) {
+            text-align: center; /* Centering the traffic light */
         }
 
-        .green {
-            background-color: green;
-            color: white;
+        .traffic-light {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 0 auto; /* Centering within the td */
         }
+
+        .red-light {
+            background-color: #f56565;
+        }
+
+        .yellow-light {
+            background-color: #f6e05e;
+        }
+
+        .green-light {
+            background-color: #48bb78;
+        }
+
+
+
     </style>
 </head>
-<body>
-    <div class="container">
-      <a href="/update">Update a task</a>
 
-        <h1>Tasks Overview</h1>
+<body>
+    <header>
+        Task Management Overview
+    </header>
+
+    <div class="container">
+        <a href="/update">Update a task</a>
         <table>
             <thead>
                 <tr>
                     {% for header in data[0] %}
-                        <th>{{ header }}</th>
+                    <th>{{ header }}</th>
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 {% for row in data[1:] %}
-                    <tr>
-                        {% for cell in row %}
-                            {% if loop.index == 5 %}
-                                <td class="{{ cell }}">{{ cell }}</td>
-                            {% else %}
-                                <td>{{ cell }}</td>
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
+                <tr>
+                    {% for cell in row %}
+                    {% if loop.index == 6 %}
+                    <td>
+                        {% if cell == "red" %}
+                        <span class="traffic-light red-light"></span>
+                        {% elif cell == "amber" %}
+                        <span class="traffic-light yellow-light"></span>
+                        {% elif cell == "green" %}
+                        <span class="traffic-light green-light"></span>
+                        {% else %}
+                        {{ cell }}
+                        {% endif %}
+                    </td>
+                    {% else %}
+                    <td>{{ cell }}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 </body>
+
 </html>

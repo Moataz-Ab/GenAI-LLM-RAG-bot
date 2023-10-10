@@ -1,6 +1,6 @@
-Task,Max Budget,Completion Date,Status
-1,20000,2023-10-31,red
-2,15000,2023-11-15,red
-3,25000,2023-11-30,red
-4,18000,2023-12-01,green
-5,30000,2023-12-15,red
+Task,Max Budget,Current budget,Completion Date,Status,recommendation
+1,20000,30000,2023-10-31,red, "The current budget is higher than the maximum budget. It is recommended to review the budget and make necessary adjustments to stay within the allocated maximum budget."]
+2,15000,20000,2023-11-15,red, None
+3,25000,10000,2023-11-30,green, "The current budget is within the allocated maximum budget. No further adjustments are necessary."]
+4,18000,20000,2023-12-01,green, None
+5,30000,60000,2023-12-15,red, None

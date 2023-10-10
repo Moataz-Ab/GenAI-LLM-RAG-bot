@@ -5,10 +5,6 @@ from langchain.chains import LLMChain
 
 
 def load_and_format_file(csv_file):
-    '''
-    - Takes in a csv file and creates file_content list object of the lines in the csv file
-    - Returns a single string of concatenated elemnts in file_contents
-    '''
     with open(csv_file, "r") as file:
         file_contents = file.readlines()
     return ''.join(file_contents)
@@ -31,7 +27,8 @@ def ask_ai(csv_file, api_key, task_number, budget, date):
 
     For task number {{task_number}}, the budget total budget invested is currently {{budget}}, and we are {{date}}.
 
-    Return a RAG color and the justification in this format [COLOR, REASON] for task {{task_number}}.
+    Return a RAG color and a recommendation in this format [COLOR, Recommendation] for task {{task_number}}.
+
 
     """
     )
@@ -49,7 +46,7 @@ def ask_ai(csv_file, api_key, task_number, budget, date):
 
     return task_number, status, response
 
-def update_status_in_csv(task_number, new_status, csv_file):
+def update_status_and_budget_in_csv(task_number, new_status, new_budget, csv_file, recommendation):
     valid_statuses = ["r", "red", "g", "green", "a", "amber", "o", "orange"]
 
     if new_status not in valid_statuses:
@@ -60,11 +57,24 @@ def update_status_in_csv(task_number, new_status, csv_file):
 
     header = rows[0].strip().split(',')
     status_index = header.index('Status')
+    budget_index = header.index('Current budget')
+
+    # Check if the recommendation column exists, if not, add it
+    if 'recommendation' not in header:
+        header.append('recommendation')
+        rows[0] = ",".join(header) + "\n"
+
+    recommendation_index = header.index('recommendation')
 
     for index, row in enumerate(rows):
         row_elements = row.strip().split(',')
         if row_elements[0] == str(task_number):
             row_elements[status_index] = new_status
+            row_elements[budget_index] = str(new_budget)
+            # Check if row already has recommendation column data, if not, add a placeholder
+            if len(row_elements) <= recommendation_index:
+                row_elements.append("")
+            row_elements[recommendation_index] = recommendation
             rows[index] = ",".join(row_elements) + "\n"
 
     with open(csv_file, "w") as file:

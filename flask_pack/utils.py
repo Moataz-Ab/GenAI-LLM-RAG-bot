@@ -82,11 +82,11 @@ def update_status_and_budget_in_csv(task_number, new_status, spent_budget, csv_f
     budget_index = header.index('Spent budget')
 
     # Check if the recommendation column exists, if not, add it
-    if 'recommendation' not in header:
-        header.append('recommendation')
+    if 'Recommendation' not in header:
+        header.append('Recommendation')
         rows[0] = ",".join(header) + "\n"
 
-    recommendation_index = header.index('recommendation')
+    recommendation_index = header.index('Recommendation')
 
     for index, row in enumerate(rows):
         row_elements = row.strip().split(',')

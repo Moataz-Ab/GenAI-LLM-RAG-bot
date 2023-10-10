@@ -5,7 +5,9 @@ import datetime
 from utils import *
 import os
 
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'sec'
 csv_path = 'tasks.csv'
 OPENAI_API_KEY = os.environ.get('api_key')
 api_key = OPENAI_API_KEY
@@ -34,9 +36,7 @@ def update_status():
     budget = request.form.get('budget')
     date = datetime.date.today()
     task_number, status, response = ask_ai(csv_path, api_key, task_number, budget, date)
-    update_status_in_csv(task_number, new_status=status, csv_file=csv_path)
-
-
+    update_status_and_budget_in_csv(task_number, new_status=status, csv_file=csv_path, new_budget=budget, recommendation=response.split(",")[1])
     return redirect(url_for('index'))
 
 

@@ -29,7 +29,7 @@ def index():
 def update_page():
     return render_template('update.html')
 
-
+#comment
 @app.route('/update_status', methods=['POST'])
 def update_status():
     task_number = request.form.get('task_number')

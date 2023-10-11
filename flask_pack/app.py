@@ -16,7 +16,7 @@ api_key = OPENAI_API_KEY
 def read_csv(csv_path):
     data = []
     with open(csv_path, 'r') as file:
-        reader = csv.reader(file)
+        reader = csv.reader(file, delimiter=";")
         for row in reader:
             data.append(row)
     return data
@@ -33,7 +33,7 @@ def update_page():
 
 @app.route('/update_status', methods=['POST'])
 def update_status():
-    csv_df = pd.read_csv(csv_path)
+    csv_df = pd.read_csv(csv_path, delimiter=";")
     task_number = request.form.get('task_number')
     spent_budget = request.form.get('budget')
     date = datetime.date.today()
@@ -41,7 +41,7 @@ def update_status():
     starting_date = csv_df.iloc[(int(task_number)-1),3]
     deadline_date = csv_df.iloc[(int(task_number)-1),4]
     task_number, status, response = ask_ai(csv_path, api_key, task_number, original_budget, spent_budget, starting_date, deadline_date, date)
-    update_status_and_budget_in_csv(task_number, new_status=status, csv_file=csv_path, spent_budget=spent_budget, recommendation=response.split(",")[1])
+    update_status_and_budget_in_csv(task_number, new_status=status, csv_file=csv_path, spent_budget=spent_budget, recommendation=response)
     return redirect(url_for('index'))
 
 #run

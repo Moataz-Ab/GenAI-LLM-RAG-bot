@@ -65,30 +65,31 @@ def update_status_and_budget_in_csv(task_number, new_status, spent_budget, csv_f
     if new_status not in valid_statuses:
         return
 
-    with open(csv_file, "r") as file:
+    with open(csv_file, "r", newline='', encoding='utf-8') as file:
         rows = file.readlines()
 
-    header = rows[0].strip().split(',')
+    header = rows[0].strip().split(';')  # Change from ',' to ';'
     status_index = header.index('Status')
     budget_index = header.index('Spent budget')
 
     # Check if the recommendation column exists, if not, add it
     if 'Recommendation' not in header:
         header.append('Recommendation')
-        rows[0] = ",".join(header) + "\n"
+        rows[0] = ";".join(header) + "\n"
 
     recommendation_index = header.index('Recommendation')
 
     for index, row in enumerate(rows):
-        row_elements = row.strip().split(',')
+        row_elements = row.strip().split(';')
         if row_elements[0] == str(task_number):
             row_elements[status_index] = new_status
             row_elements[budget_index] = str(spent_budget)
             # Check if row already has recommendation column data, if not, add a placeholder
             if len(row_elements) <= recommendation_index:
                 row_elements.append("")
-            row_elements[recommendation_index] = recommendation
-            rows[index] = ",".join(row_elements) + "\n"
+            formatted_recommendation = f'[{new_status}, "{recommendation.strip()}"]'
+            row_elements[recommendation_index] = formatted_recommendation
+            rows[index] = ";".join(row_elements) + "\n"  # ensure newline at end of row
 
-    with open(csv_file, "w") as file:
+    with open(csv_file, "w", newline='', encoding='utf-8') as file:
         file.writelines(rows)

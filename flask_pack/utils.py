@@ -21,7 +21,6 @@ def load_openai_llm(api_key, model="gpt-3.5-turbo-instruct-0914", temperature=0.
     llm = OpenAI(openai_api_key=api_key, model=model, temperature=temperature)
     return llm
 
-# def ask_ai(csv_file, api_key, task_number, budget, date):
 def ask_ai(csv_file, api_key, task_number, original_budget, spent_budget, starting_date, deadline_date, date):
     '''
     - Takes in csv and farmats it into a single string
@@ -34,16 +33,8 @@ def ask_ai(csv_file, api_key, task_number, original_budget, spent_budget, starti
 
     prompt = PromptTemplate(
         input_variables=["original_budget", "spent_budget", "starting_date", "deadline_date", "task_number", "date"],
-        template=f"""You are given this file
-
-    {formatted_file_contents},
-
-    For task number {{task_number}}, the original budget allocated for the task is {{original_budget}}, the spent budget for this task is {{spent_budget}}, the task starting date is {{starting_date}}, and task deadline is {{deadline_date}}. Today is {{date}}.
-
-    Return a RAG color and a recommendation in this format [COLOR, Recommendation] for task {{task_number}}.
-
-
-    """
+        template=f"""You are an expert in project management. you are given this file which contains data of tasks in a project {formatted_file_contents} For task number {{task_number}}, the original budget allocated for the task is {{original_budget}}. From this amount we have so far spent {{spent_budget}}, the task starting date is {{starting_date}}, and task deadline is {{deadline_date}}. Today is {{date}}. Use your understanding of project management to return a RAG color representing the task status and a recommendation in this format [COLOR, Recommendation] for task {{task_number}}. Your recommendation must include 3 expert exdvices about three important aspects of current status of the task number {{task_number}}
+        """
     )
 
     chain = LLMChain(llm=llm, prompt=prompt)

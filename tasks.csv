@@ -1,6 +1,6 @@
 Task,Original budget,Spent budget,Starting date, Deadline date,Status,Recommendation
-1,20000,1000,2023-10-01, 2023-10-31,red, "The current budget is higher than the maximum budget. It is recommended to review the budget and make necessary adjustments to stay within the allocated maximum budget."]
-2,15000,20000,2023-10-05,2023-11-15,red, "The current budget is higher than the maximum budget. It is recommended to review the budget and make necessary adjustments to stay within the allocated maximum budget."]
-3,25000,10000,2023-10-15,2023-11-30,green, "The current budget is within the allocated maximum budget. No further adjustments are necessary."]
-4,18000,9000,2023-10-10,2023-12-01,green, "The current budget is within the allocated maximum budget. No further adjustments are necessary."]
+1,20000,23600,2023-10-01, 2023-10-31,red, "The current budget for task 1 has exceeded the allocated maximum budget. It is recommended to review the budget and make necessary adjustments to stay within the allocated maximum budget. Additionally
+2,15000,1200,2023-10-05,2023-11-15,green, The current status of task 2 is on track and within the allocated budget. However
+3,25000,23999,2023-10-15,2023-11-30,amber, "The current budget for task 3 is within the allocated maximum budget. However
+4,18000,19500,2023-10-10,2023-12-01,amber, "The current budget for task 4 is within the allocated maximum budget. However
 5,30000,29999,2023-10-20,2023-12-15,amber, "The current budget is higher than the maximum budget. It is recommended to review the budget and make necessary adjustments to stay within the allocated maximum budget."]

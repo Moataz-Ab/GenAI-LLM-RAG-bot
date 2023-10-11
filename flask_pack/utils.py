@@ -1,7 +1,7 @@
 from langchain.llms.openai import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-
+import pandas as pd
 
 
 def load_and_format_file(csv_file):
@@ -33,7 +33,17 @@ def ask_ai(csv_file, api_key, task_number, original_budget, spent_budget, starti
 
     prompt = PromptTemplate(
         input_variables=["original_budget", "spent_budget", "starting_date", "deadline_date", "task_number", "date"],
-        template=f"""You are an expert in project management. you are given this file which contains data of tasks in a project {formatted_file_contents} For task number {{task_number}}, the original budget allocated for the task is {{original_budget}}. From this amount we have so far spent {{spent_budget}}, the task starting date is {{starting_date}}, and task deadline is {{deadline_date}}. Today is {{date}}. Use your understanding of project management to return a RAG color representing the task status and a recommendation in this format [COLOR, Recommendation] for task {{task_number}}. Your recommendation must include 3 expert exdvices about three important aspects of current status of the task number {{task_number}}
+
+        template=f"""You are an expert in project management.
+        you are given this file which contains data of tasks in a project {formatted_file_contents}
+        For task number {{task_number}}, the original budget allocated for the task is {{original_budget}}.
+        From this amount we have so far spent {{spent_budget}}, the task starting date is {{starting_date}},
+        and task deadline is {{deadline_date}}. Today is {{date}}. Use your understanding of project
+        management to return a
+        RAG color representing the task status and a recommendation for task {{task_number}}.
+        Your recommendation must include 3 expert exdvices about three important aspects of current
+        status of the task number {{task_number}}.
+        IMPROTANT: RETURN in this format [COLOR, Recommendations].
         """
     )
 
@@ -53,43 +63,28 @@ def ask_ai(csv_file, api_key, task_number, original_budget, spent_budget, starti
 
     return task_number, status, response
 
+
 def update_status_and_budget_in_csv(task_number, new_status, spent_budget, csv_file, recommendation):
-    '''
-    - Takes in the csv file, task number, the spent budget, the new status and recommendation from the model
-    - Locates the status datapoint of the selected task and updates the status
-    - Adds the task recommendation in the recommendation column
-    '''
-
     valid_statuses = ["r", "red", "g", "green", "a", "amber", "o", "orange"]
-
+    print(task_number, spent_budget)
     if new_status not in valid_statuses:
+        print(new_status)
         return
 
-    with open(csv_file, "r", newline='', encoding='utf-8') as file:
-        rows = file.readlines()
+    df = pd.read_csv(csv_file, sep=';', encoding='utf-8')
 
-    header = rows[0].strip().split(';')  # Change from ',' to ';'
-    status_index = header.index('Status')
-    budget_index = header.index('Spent budget')
+    if 'Recommendation' not in df.columns:
+        df['Recommendation'] = ""
 
-    # Check if the recommendation column exists, if not, add it
-    if 'Recommendation' not in header:
-        header.append('Recommendation')
-        rows[0] = ";".join(header) + "\n"
+    task_number = int(task_number)-1
 
-    recommendation_index = header.index('Recommendation')
+    if 0 <= task_number < len(df):
+        df.loc[task_number, 'Status'] = new_status
+        df.loc[task_number, 'Spent budget'] = spent_budget
+        formatted_recommendation = f'[{new_status}, "{recommendation.strip()}"]'
+        df.loc[task_number, 'Recommendation'] = formatted_recommendation
 
-    for index, row in enumerate(rows):
-        row_elements = row.strip().split(';')
-        if row_elements[0] == str(task_number):
-            row_elements[status_index] = new_status
-            row_elements[budget_index] = str(spent_budget)
-            # Check if row already has recommendation column data, if not, add a placeholder
-            if len(row_elements) <= recommendation_index:
-                row_elements.append("")
-            formatted_recommendation = f'[{new_status}, "{recommendation.strip()}"]'
-            row_elements[recommendation_index] = formatted_recommendation
-            rows[index] = ";".join(row_elements) + "\n"  # ensure newline at end of row
+        df.to_csv("tasks.csv", sep=';', index=False, encoding='utf-8')
 
-    with open(csv_file, "w", newline='', encoding='utf-8') as file:
-        file.writelines(rows)
+    else:
+        print(f"No task found with task number: {task_number}")

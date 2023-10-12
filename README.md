@@ -34,4 +34,4 @@ Once the project data is fed into the tool, the LLM model is prompted to provide
 ![](img/update_button.jpg)
 
 
-![](img/editing_snapshot.png)
+![](img/editing_snapshot.jpg)

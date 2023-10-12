@@ -25,9 +25,10 @@ Once the project data is fed into the tool, the LLM model is prompted to provide
 # Using the app
 - The app simplifies the RAG system into evaluating the task status based on the spent budget and the task deadline
 - The initial project data is fed into app in csv format
-- To update a task data, the user can access the editing page by clicking the "Update a task" botton
+- To update a task data, the user can access the editing page by clicking the "Update a task" button
 - The user defines the number of the task and the budget already spent on the task to date, and then clicks "Update status"
 - The LLM is then automatically prompted to evaluate the task status based on the new data and provides updated expert recommendations
 
-  
+![](img/update_button.jpg)
 
+![](img/editing_snapshot.png)

@@ -4,16 +4,6 @@ from langchain.chains import LLMChain
 import pandas as pd
 
 
-def load_and_format_file(csv_file):
-    '''
-    - Takes in a csv file and creates file_content list object of the lines in the csv file
-    - Returns a single string of concatenated elemnts in file_contents
-    '''
-    with open(csv_file, "r") as file:
-        file_contents = file.readlines()
-    return ''.join(file_contents)
-
-
 def load_openai_llm(api_key, model="gpt-3.5-turbo-instruct-0914", temperature=0.4):
     '''
     - Creates OpenAI model
@@ -28,7 +18,7 @@ def ask_ai(csv_file, api_key, task_number, original_budget, spent_budget, starti
     - Propts the model to return task status color and recommendations
     - Returns the task number, status color, and recommendation response
     '''
-    formatted_file_contents = load_and_format_file(csv_file)
+
     llm = load_openai_llm(api_key)
 
     prompt = PromptTemplate(
@@ -80,7 +70,7 @@ def update_status_and_budget_in_csv(task_number, new_status, spent_budget, csv_f
     if 0 <= task_number < len(df):
         df.loc[task_number, 'Status'] = new_status
         df.loc[task_number, 'Spent budget'] = spent_budget
-        formatted_recommendation = f'[{new_status}, "{recommendation.strip()}"]'
+        formatted_recommendation = f'{recommendation.strip().split(",")[1].replace("]", "")}'
         df.loc[task_number, 'Recommendation'] = formatted_recommendation
 
         df.to_csv("tasks.csv", sep=';', index=False, encoding='utf-8')

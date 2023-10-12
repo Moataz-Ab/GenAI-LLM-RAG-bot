@@ -24,7 +24,6 @@ Once the project data is fed into the tool, the LLM model is prompted to provide
 
 # Using the app
 - The app simplifies the RAG system into evaluating the task status based on the spent budget and the task deadline
-- Before running the app, the user should create a .env file within the package and save their private OpenAI token in it as OPENAI_API_KEY = ""
 - The initial project data is then added to the package in csv format and saved as "tasks.csv"
 - The user can then start the app by running app.py
 - To update a task data, the user can access the editing page by clicking the "Update a task" button

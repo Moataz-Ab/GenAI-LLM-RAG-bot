@@ -1,21 +1,18 @@
 Task;Original budget;Spent budget;Starting date; Deadline date;Status;Recommendation
-1;20000;5000;2023-10-01; 2023-10-31;green;" The task is currently on track and within budget. However, here are three expert recommendations to ensure its success:
-
-1. Monitor progress closely: With only 19 days left until the deadline, it's important to closely monitor the progress of the task to ensure it stays on track. This will also help identify any potential delays or issues that may arise.
-
-2. Communicate effectively: Communication is key in project management, so make sure all team members are aware of their roles and responsibilities, as well as any changes or updates to the task. This will help avoid confusion and ensure everyone is working towards the same goal.
-
-3. Prioritize tasks: With only 19 days left, it's important to prioritize tasks and focus on the most critical aspects of the project. This will help ensure that the most important parts of the task are completed on time and within budget."
-2;15000;5000;2023-10-05;2023-11-15;green;" ""Based on the current status of the task, it is recommended to continue with the current budget allocation and timeline. However, there are a few important aspects to consider: 
-1. Monitor the progress of the task closely to ensure it stays on track and within budget. Use project management tools to track and analyze the progress.
-2. Communicate regularly with the team to address any potential issues or delays. This will help to avoid any surprises and keep everyone on the same page.
-3. Keep a contingency plan in place in case of any unexpected obstacles or changes in requirements. This will help to mitigate any potential risks and ensure the successful completion of the task on time and within budget."""
-3;25000;10000;2023-10-15;2023-11-30;red;" The task is currently behind schedule and over budget. It is recommended to take immediate action to get the project back on track. Here are three expert advices:
-1. Reevaluate the project plan and make necessary adjustments to ensure the project can be completed within the remaining time and budget.
-2. Communicate with team members to identify any potential roadblocks or issues that may be causing delays.
-3. Prioritize tasks and allocate resources effectively to ensure the most critical aspects of the project are completed on time.]"
-4;18000;60000;2023-10-10;2023-12-01;red;" ""The task is currently over budget and behind schedule. It is recommended to take immediate action to bring the project back on track. Here are three expert advices to consider: 
-1. Re-evaluate the project scope and identify any unnecessary tasks or features that can be removed to reduce costs. 
-2. Increase communication and collaboration among team members to ensure efficient use of resources and timely completion of tasks. 
-3. Use project management tools and techniques, such as Gantt charts and critical path analysis, to identify and address any potential delays or roadblocks in the project timeline."""
-5;30000;2000;2023-10-20;2023-12-15;amber;"[amber, ""[amber, """"The current budget for task 5 is higher than the allocated maximum budget. It is recommended to review the budget and make necessary adjustments to stay within the allocated maximum budget. Additionally, it is important to closely monitor the budget and expenses to avoid further overspending. Finally, it is crucial to continuously track the progress of the task and make necessary adjustments to ensure it is completed within the allocated timeframe. It is also recommended to regularly communicate with the project team and stakeholders to provide updates on the budget and address any concerns or issues that may arise.""""]""""]""""]"
+1;20000;5500;2023-10-01; 2023-10-31;green;" ""The task is currently on track and within budget. However, there are a few recommendations to ensure its success:""
+1. Monitor the progress closely and make any necessary adjustments to the timeline to ensure the task is completed on time.
+2. Keep track of expenses and make sure they align with the allocated budget.
+3. Communicate regularly with the team to ensure everyone is on the same page and any potential issues are addressed promptly."""
+2;15000;12500;2023-09-25;2023-11-01;green;" ""The current status of task 2 is on track and within budget. However, there are a few recommendations to ensure the task is completed successfully:""
+1. Monitor the progress closely to ensure that the remaining budget is allocated effectively and efficiently.
+2. Consider adjusting the timeline to allow for any unexpected delays or issues that may arise.
+3. Communicate regularly with the team to ensure everyone is aware of their roles and responsibilities, and address any potential roadblocks or concerns."""
+3;25000;19000;2023-08-15;2023-10-30;amber; It is recommended to closely monitor the remaining budget and make necessary adjustments to avoid exceeding the allocated amount. Additionally, it is important to regularly communicate with the team to ensure that all tasks are on track and any potential delays are addressed promptly. Lastly, it is advisable to review the project plan and make necessary adjustments to ensure that the task can be completed within the given timeline.
+4;18000;17000;2023-08-10;2023-12-01;red;" The task is behind schedule and over budget. It is recommended to take immediate action to get the project back on track. Here are three important aspects to consider:
+1. Schedule: The task is currently behind schedule, with only 2 months left until the deadline. It is important to review the project schedule and identify any potential delays or roadblocks. Adjustments may need to be made to the timeline in order to meet the deadline.
+2. Budget: The task has already spent 94% of the allocated budget, with 2 months still remaining. It is important to closely monitor the remaining budget and identify any areas where costs can be reduced in order to stay within the allocated amount.
+3. Resources: It is important to assess whether the current resources allocated to the task are sufficient to complete it on time and within budget. If necessary, additional resources may need to be allocated or reallocated in order to ensure the task is completed successfully."
+5;30000;15000;2023-10-05;2023-12-15;green;" ""Based on the current status of task 5, it is on track and within budget. However, there are a few recommendations to ensure its success:
+1. Monitor the progress closely and make sure that the remaining budget is allocated wisely to avoid any unexpected expenses.
+2. Keep an eye on the task's starting date and make sure that all necessary resources are available to start on time.
+3. Continuously communicate with the team and stakeholders to ensure everyone is on the same page and any potential issues are addressed promptly."""

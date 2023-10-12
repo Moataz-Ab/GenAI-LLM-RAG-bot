@@ -70,7 +70,7 @@ def update_status_and_budget_in_csv(task_number, new_status, spent_budget, csv_f
     if 0 <= task_number < len(df):
         df.loc[task_number, 'Status'] = new_status
         df.loc[task_number, 'Spent budget'] = spent_budget
-        formatted_recommendation = f'{recommendation.strip().split(",")[1].replace("]", "")}'
+        formatted_recommendation = f'{recommendation.strip().split(",", 1)[1].replace("]", "")}'
         df.loc[task_number, 'Recommendation'] = formatted_recommendation
 
         df.to_csv("tasks.csv", sep=';', index=False, encoding='utf-8')

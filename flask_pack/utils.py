@@ -35,7 +35,6 @@ def ask_ai(csv_file, api_key, task_number, original_budget, spent_budget, starti
         input_variables=["original_budget", "spent_budget", "starting_date", "deadline_date", "task_number", "date"],
 
         template=f"""You are an expert in project management.
-        you are given this file which contains data of tasks in a project {formatted_file_contents}
         For task number {{task_number}}, the original budget allocated for the task is {{original_budget}}.
         From this amount we have so far spent {{spent_budget}}, the task starting date is {{starting_date}},
         and task deadline is {{deadline_date}}. Today is {{date}}. Use your understanding of project
@@ -57,7 +56,7 @@ def ask_ai(csv_file, api_key, task_number, original_budget, spent_budget, starti
         'task_number': task_number,
         'date' : date
     })
-
+    print(f"askai chain response: {response}")
     status = response.split(",")[0].strip().lower()
     status = status.replace("[", "").replace("]", "").strip()
 
@@ -66,7 +65,7 @@ def ask_ai(csv_file, api_key, task_number, original_budget, spent_budget, starti
 
 def update_status_and_budget_in_csv(task_number, new_status, spent_budget, csv_file, recommendation):
     valid_statuses = ["r", "red", "g", "green", "a", "amber", "o", "orange"]
-    print(task_number, spent_budget)
+    print(task_number, spent_budget, recommendation)
     if new_status not in valid_statuses:
         print(new_status)
         return

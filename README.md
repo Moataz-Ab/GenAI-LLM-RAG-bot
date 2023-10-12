@@ -17,5 +17,3 @@ RAG is a coloring system that assigns a color (Red, Amber, or Green) to each pro
 - The user defines the number of the task and the budget spent on the task to date
 - The app returns the RAG status of the task and strategic recommendations on how to proceed based on the budget status and the distance from the deadline
 
-# Collaboration
-This work was done in collaboration with my colleague Luca Morel [@lccopu]
